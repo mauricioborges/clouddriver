@@ -34,6 +34,7 @@ def cloudProviderProjects = [
   'gce': [':clouddriver-consul', ':clouddriver-google', ':clouddriver-google-common'],
   'huaweicloud': [':clouddriver-huaweicloud'],
   'kubernetes': [':clouddriver-kubernetes', ':clouddriver-kubernetes-v1', ':clouddriver-kubernetes-v2', ':clouddriver-docker'],
+  'openshift': ['clouddriver-openshift'],
   'oracle': [':clouddriver-oracle'],
   'tencentcloud': [':clouddriver-tencentcloud']
 ]
