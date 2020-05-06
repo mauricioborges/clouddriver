@@ -18,8 +18,12 @@
 package com.netflix.spinnaker.clouddriver.openshift.op.manifest;
 
 import com.netflix.spinnaker.clouddriver.deploy.DeployDescription;
+import com.netflix.spinnaker.clouddriver.jobs.JobRequest;
+import com.netflix.spinnaker.clouddriver.jobs.JobResult;
+import com.netflix.spinnaker.clouddriver.jobs.local.JobExecutorLocal;
 import com.netflix.spinnaker.clouddriver.kubernetes.v2.op.OperationResult;
 import com.netflix.spinnaker.clouddriver.orchestration.AtomicOperation;
+import java.util.Arrays;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,6 +37,12 @@ public class OpenshiftProcessTemplateOperation implements AtomicOperation<Operat
 
   @Override
   public OperationResult operate(List priorOutputs) {
+    JobRequest jobRequest =
+        new JobRequest(Arrays.asList("oc process -f Manifest.yml -o yaml".split(" ")));
+    JobResult<String> jobResult = new JobExecutorLocal(1).runJob(jobRequest);
+    log.warn(jobResult.getError());
+    log.warn(jobResult.getOutput());
+    log.warn(jobResult.getResult().toString());
     return null;
   }
 }
